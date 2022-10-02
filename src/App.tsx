@@ -1,34 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { Box, Heading } from "@chakra-ui/react";
+import styled from "@emotion/styled";
+import { motion, useAnimation, useMotionValue } from "framer-motion";
+import { FC, useState } from "react";
+import "./App.css";
+import reactLogo from "./assets/react.svg";
+import { Perk } from "./components/Perk";
+import { Stack } from "./components/Stack";
 
 function App() {
-  const [count, setCount] = useState(0)
+	const Wrapper = styled(Stack)`
+		background: #1f2937;
+		height: 100%;
+	`;
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+	const Item = styled(motion.div)`
+		background: #f9fafb;
+		width: 200px;
+		height: 250px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 80px;
+		text-shadow: 0 10px 10px #d1d5db;
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+		border-radius: 8px;
+		transform: ${() => {
+			let rotation = Math.random() * (5 - -5) + -5;
+			return `rotate(${rotation}deg)`;
+		}};
+	`;
+
+	return (
+		<Box as={"main"}>
+			<Heading textAlign={"center"}>Git Gud</Heading>
+			{/* <Wrapper onVote={(item: any, vote: any) => console.log(item.props, vote)}>
+				<Item data-value="waffles" whileTap={{ scale: 1.15 }}>
+					🧇
+				</Item>
+				<Item data-value="pancakes" whileTap={{ scale: 1.15 }}>
+					🥞
+				</Item>
+				<Item data-value="donuts" whileTap={{ scale: 1.15 }}>
+					🍩
+				</Item>
+			</Wrapper> */}
+			{/* <Flashcards /> */}
+			<Perk />
+		</Box>
+	);
 }
 
-export default App
+export default App;

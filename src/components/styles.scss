@@ -6,7 +6,6 @@
 }
 html {
 	overflow: hidden;
-	font-size: 56.25%; // 9px
 
 	// CSS Variables
 	--color-yellow: #ddb724;
@@ -29,12 +28,7 @@ html {
 	--main-bg-color: #8cd1b3; // blue
 	--border-radius: 1.5rem;
 }
-body {
-	// background-color: var(--main-bg-color);
-	color: var(--color-yellow);
-	background-color: #1a1616;
-	min-height: 100vh;
-
+main {
 	display: grid;
 	justify-items: center;
 	align-items: center;
@@ -43,17 +37,6 @@ body {
 		color: var(--color-off-bone);
 	}
 }
-
-// .card h1,
-// .level {
-// 	font-family: "Staatliches", sans-serif;
-// }
-
-// p,
-// .card span,
-// .special {
-// 	font-family: "Lakki Reddy", cursive;
-// }
 
 body > h1 {
 	// font-family: "Sriracha", cursive;
@@ -462,11 +445,11 @@ body > h1 {
 		border: 2px solid var(--color-off-black);
 		border-radius: 1rem;
 
-		p {
-			font-size: 2rem;
-			line-height: 125%;
-			color: var(--color-off-black);
-		}
+		// p {
+		// 	font-size: 2rem;
+		// 	line-height: 125%;
+		// 	color: var(--color-off-black);
+		// }
 	}
 
 	.special {
@@ -565,35 +548,34 @@ body > h1 {
 .main-pane {
 	overflow: hidden;
 	position: relative;
-	&:before {
-		content: "";
-		position: absolute;
-		top: -42rem;
-		left: -32rem;
-		//height: 735px;
-		height: 69.5rem;
-		width: 100rem;
 
-		// Trying to work out the correct values took a while
-		background: repeating-conic-gradient(
-			from 90deg,
-			var(--color-main-lighten2) 0 25deg,
-			var(--color-bone) 0 35deg,
-			var(--color-main) 0 40deg,
-			var(--color-bone) 0 47deg,
-			var(--color-main-lighten) 0 50deg,
-			var(--color-bone) 0 55deg,
-			var(--color-main) 0 127deg,
-			var(--color-bone) 0 132deg,
-			var(--color-main-lighten) 0 135deg,
-			var(--color-bone) 0 140deg,
-			var(--color-main) 0 145deg,
-			var(--color-bone) 0 155deg,
-			var(--color-main-lighten2) 0 360deg
-		);
+	content: "";
+	// position: absolute;
+	// top: -42rem;
+	// left: -32rem;
+	//height: 735px;
+	height: 100%;
+	// width: 100rem;
 
-		border-radius: 50%;
-	}
+	// Trying to work out the correct values took a while
+	background: repeating-conic-gradient(
+		from 90deg,
+		var(--color-main-lighten2) 0 25deg,
+		var(--color-bone) 0 35deg,
+		var(--color-main) 0 40deg,
+		var(--color-bone) 0 47deg,
+		var(--color-main-lighten) 0 50deg,
+		var(--color-bone) 0 55deg,
+		var(--color-main) 0 127deg,
+		var(--color-bone) 0 132deg,
+		var(--color-main-lighten) 0 135deg,
+		var(--color-bone) 0 140deg,
+		var(--color-main) 0 145deg,
+		var(--color-bone) 0 155deg,
+		var(--color-main-lighten2) 0 360deg
+	);
+
+	border-radius: 50%;
 
 	img.slugger {
 		margin-top: -4rem;

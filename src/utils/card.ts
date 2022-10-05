@@ -59,7 +59,7 @@ const animateBack = async (element: HTMLElement) => {
 	await sleep(settings.snapBackDuration);
 	element.style.transition = "10ms";
 };
-const getSwipeDirection = (property: any) => {
+const getSwipeDirection = (property: { x: number; y: number }) => {
 	if (Math.abs(property.x) > Math.abs(property.y)) {
 		if (property.x > settings.swipeThreshold) {
 			return "right";

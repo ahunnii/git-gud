@@ -32,9 +32,9 @@ function Advanced() {
 				.fill(0)
 				.map((i) => React.createRef()),
 		[]
-	);
+	) as any[];
 
-	const updateCurrentIndex = (val) => {
+	const updateCurrentIndex = (val: number) => {
 		setCurrentIndex(val);
 		currentIndexRef.current = val;
 	};
@@ -44,12 +44,12 @@ function Advanced() {
 	const canSwipe = currentIndex >= 0;
 
 	// set last direction and decrease current index
-	const swiped = (direction, nameToDelete, index) => {
+	const swiped = (direction: any, nameToDelete: string, index: number) => {
 		setLastDirection(direction);
 		updateCurrentIndex(index - 1);
 	};
 
-	const outOfFrame = (name, idx) => {
+	const outOfFrame = (name: string, idx: any) => {
 		console.log(`${name} (${idx}) left the screen!`, currentIndexRef.current);
 		// handle the case in which go back is pressed before card goes outOfFrame
 		currentIndexRef.current >= idx && childRefs[idx].current.restoreCard();
@@ -58,7 +58,7 @@ function Advanced() {
 		// during latest swipes. Only the last outOfFrame event should be considered valid
 	};
 
-	const swipe = async (dir) => {
+	const swipe = async (dir: string) => {
 		if (canSwipe && currentIndex < db.length) {
 			await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
 		}
@@ -88,7 +88,7 @@ function Advanced() {
 								ref={childRefs[index]}
 								className="swipe"
 								key={character.question}
-								onSwipe={(dir) => swiped(dir, character.question, index)}
+								onSwipe={(dir: any) => swiped(dir, character.question, index)}
 								onCardLeftScreen={() => outOfFrame(character.question, index)}>
 								<Box className="card" shadow={"base"} p={5} h={"300px"}>
 									<h3>{character.question}</h3>

@@ -16,11 +16,12 @@ interface CardProps {
 	onSwipe: any;
 	onCardLeftScreen: any;
 	className?: string;
-	preventSwipe?: [any];
+	preventSwipe?: any;
 	swipeRequirementType?: string;
 	swipeThreshold?: number;
-	onSwipeRequirementFulfilled: any;
-	onSwipeRequirementUnfulfilled: any;
+	onSwipeRequirementFulfilled?: any;
+	onSwipeRequirementUnfulfilled?: any;
+	ref: any;
 }
 
 const QuestionCard: FC<CardProps> = forwardRef(
@@ -37,7 +38,7 @@ const QuestionCard: FC<CardProps> = forwardRef(
 			onSwipeRequirementFulfilled,
 			onSwipeRequirementUnfulfilled,
 		},
-		ref
+		ref: any
 	) => {
 		settings.swipeThreshold = swipeThreshold;
 		const swipeAlreadyReleased = useRef(false);

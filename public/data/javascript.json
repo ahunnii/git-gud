@@ -39,5 +39,45 @@
 	{
 		"question": "What are lambda or arrow functions?",
 		"answer": "javascript/10.md"
+	},
+	{
+		"question": "What is a first class function?",
+		"answer": "javascript/11.md"
+	},
+	{
+		"question": "What is a first order function?",
+		"answer": "javascript/12.md"
+	},
+	{
+		"question": "What is a higher order function?",
+		"answer": "javascript/13.md"
+	},
+	{
+		"question": "What is a unary function?",
+		"answer": "javascript/14.md"
+	},
+	{
+		"question": "What is the currying function?",
+		"answer": "javascript/15.md"
+	},
+	{
+		"question": "What is a pure function?",
+		"answer": "javascript/16.md"
+	},
+	{
+		"question": "What is the purpose of the let keyword?",
+		"answer": "javascript/17.md"
+	},
+	{
+		"question": "What is the difference between let and var?",
+		"answer": "javascript/18.md"
+	},
+	{
+		"question": "What is the reason to choose the name let as a keyword?",
+		"answer": "javascript/19.md"
+	},
+	{
+		"question": "How do you redeclare variables in switch block without an error?",
+		"answer": "javascript/20.md"
 	}
 ]

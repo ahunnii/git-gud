@@ -37,6 +37,7 @@ const Answer: FC<AnswerProps> = ({ question, answer }) => {
 		<>
 			<Button
 				onClick={onOpen}
+				onTouchEnd={onOpen}
 				variant="outline"
 				mt={5}
 				borderColor={"rgb(0, 230,50)"}

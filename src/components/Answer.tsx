@@ -47,13 +47,14 @@ const Answer: FC<AnswerProps> = ({ question, answer }) => {
 				Reveal the Answer
 			</Button>
 
-			<Modal onClose={onClose} isOpen={isOpen} size={"full"} isCentered>
+			<Modal onClose={onClose} isOpen={isOpen} size={"full"} scrollBehavior={"inside"} isCentered>
 				<ModalOverlay />
 				<ModalContent
 					className="piece output"
 					bg={"black"}
 					color={"rgb(var(--main))"}
-					fontFamily={"Roboto Mono, monospace"}>
+					fontFamily={"Roboto Mono, monospace"}
+					py={10}>
 					<ModalHeader>{question}</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>

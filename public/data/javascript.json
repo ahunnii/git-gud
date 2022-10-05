@@ -1,0 +1,43 @@
+[
+	{
+		"question": "What are the possible ways to create objects in JavaScript?",
+		"answer": "javascript/1.md"
+	},
+
+	{
+		"question": "What is a prototype chain?",
+		"answer": "javascript/2.md"
+	},
+	{
+		"question": "What is the difference between Call, Apply and Bind?",
+		"answer": "javascript/3.md"
+	},
+	{
+		"question": "What is JSON and its common operations?",
+		"answer": "javascript/4.md"
+	},
+	{
+		"question": "What is the purpose of the array slice method?",
+		"answer": "javascript/5.md"
+	},
+	{
+		"question": "What is the purpose of the array splice method?",
+		"answer": "javascript/6.md"
+	},
+	{
+		"question": "What is the difference between slice and splice?",
+		"answer": "javascript/7.md"
+	},
+	{
+		"question": "How do you compare Object and Map?",
+		"answer": "javascript/8.md"
+	},
+	{
+		"question": "What is the difference between == and === operators?",
+		"answer": "javascript/9.md"
+	},
+	{
+		"question": "What are lambda or arrow functions?",
+		"answer": "javascript/10.md"
+	}
+]

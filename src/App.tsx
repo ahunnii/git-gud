@@ -1,48 +1,142 @@
-import { Box, Heading } from "@chakra-ui/react";
-import styled from "@emotion/styled";
-import { motion, useAnimation, useMotionValue } from "framer-motion";
-import { FC, useState } from "react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+// import TinderCard from '../react-tinder-card/index '\
+import {
+	Button,
+	Modal,
+	ModalBody,
+	ModalCloseButton,
+	ModalContent,
+	ModalFooter,
+	ModalHeader,
+	ModalOverlay,
+	useDisclosure,
+} from "@chakra-ui/react";
+
+import { MdCheckCircle, MdOutlineCancel, MdUndo } from "react-icons/md";
+
+import db from "../public/data/javascript.json";
 import "./App.css";
-import reactLogo from "./assets/react.svg";
-import { Perk } from "./components/Perk";
-import { Stack } from "./components/Stack";
+import Answer from "./components/Answer";
+import QuestionCard from "./components/Card";
 
-function App() {
-	const Wrapper = styled(Stack)`
-		background: #1f2937;
-		height: 100%;
-	`;
+function Advanced() {
+	const [currentIndex, setCurrentIndex] = useState(db.length - 1);
+	const [lastDirection, setLastDirection] = useState();
+	// used for outOfFrame closure
+	const currentIndexRef = useRef(currentIndex);
 
-	const Item = styled(motion.div)`
-		display: flex;
-		align-items: center;
-		justify-content: center;
+	const childRefs = useMemo(
+		() =>
+			Array(db.length)
+				.fill(0)
+				.map((i) => React.createRef()),
+		[]
+	);
 
-		// text-shadow: 0 10px 10px #d1d5db;
-		// box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-		border-radius: 8px;
-		transform: ${() => {
-			let rotation = Math.random() * (5 - -5) + -5;
-			return `rotate(${rotation}deg)`;
-		}};
-	`;
+	const updateCurrentIndex = (val) => {
+		setCurrentIndex(val);
+		currentIndexRef.current = val;
+	};
+
+	const canGoBack = currentIndex < db.length - 1;
+
+	const canSwipe = currentIndex >= 0;
+
+	// set last direction and decrease current index
+	const swiped = (direction, nameToDelete, index) => {
+		setLastDirection(direction);
+		updateCurrentIndex(index - 1);
+	};
+
+	const outOfFrame = (name, idx) => {
+		console.log(`${name} (${idx}) left the screen!`, currentIndexRef.current);
+		// handle the case in which go back is pressed before card goes outOfFrame
+		currentIndexRef.current >= idx && childRefs[idx].current.restoreCard();
+		// TODO: when quickly swipe and restore multiple times the same card,
+		// it happens multiple outOfFrame events are queued and the card disappear
+		// during latest swipes. Only the last outOfFrame event should be considered valid
+	};
+
+	const swipe = async (dir) => {
+		if (canSwipe && currentIndex < db.length) {
+			await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
+		}
+	};
+
+	// increase current index and show card
+	const goBack = async () => {
+		if (!canGoBack) return;
+		const newIndex = currentIndex + 1;
+		updateCurrentIndex(newIndex);
+		await childRefs[newIndex].current.restoreCard();
+	};
 
 	return (
-		<Box as={"main"}>
-			<Heading textAlign={"center"}>Git Gud</Heading>
-			<Wrapper onVote={(item: any, vote: any) => console.log(item.props, vote)}>
-				<Item data-value="waffles" whileTap={{ scale: 1.15 }}>
-					<Perk />
-				</Item>
-				<Item data-value="pancakes" whileTap={{ scale: 1.15 }}>
-					<Perk />
-				</Item>
-				<Item data-value="donuts" whileTap={{ scale: 1.15 }}>
-					<Perk />
-				</Item>
-			</Wrapper>
-		</Box>
+		<div className="app fallout">
+			<Box className="">
+				<Box
+					className="piece output"
+					flexDir={"column"}
+					justifyContent={{ base: "flex-start", md: "center" }}
+					w="100vw"
+					display={"inline-flex"}>
+					<Heading my={2}>Git Gud</Heading>
+					<Box className="cardContainer" w="100%" mx="auto">
+						{db.map((character, index) => (
+							<QuestionCard
+								ref={childRefs[index]}
+								className="swipe"
+								key={character.question}
+								onSwipe={(dir) => swiped(dir, character.question, index)}
+								onCardLeftScreen={() => outOfFrame(character.question, index)}>
+								<Box className="card" shadow={"base"} p={5} h={"300px"}>
+									<h3>{character.question}</h3>
+									<Answer question={character.question} answer={character.answer} />
+								</Box>
+							</QuestionCard>
+						))}
+					</Box>
+					<Flex w="300px" justifyContent={"space-around"} mx="auto" my={5}>
+						<Button
+							onClick={() => swipe("left")}
+							display={"flex"}
+							variant="ghost"
+							_hover={{
+								backgroundColor: "#152e08",
+							}}>
+							<MdOutlineCancel />
+						</Button>
+
+						<Button
+							onClick={() => goBack()}
+							variant="ghost"
+							_hover={{
+								backgroundColor: "#152e08",
+							}}
+							disabled={!canGoBack}>
+							<MdUndo />
+						</Button>
+						<Button
+							onClick={() => swipe("right")}
+							variant="ghost"
+							_hover={{
+								backgroundColor: "#152e08",
+							}}>
+							<MdCheckCircle />
+						</Button>
+					</Flex>{" "}
+					{lastDirection ? (
+						<h2 key={lastDirection} className="infoText">
+							{lastDirection == "left" ? "You still don't know it..." : "You kind of know it!"}
+						</h2>
+					) : (
+						<h2 className="infoText">Swipe a card or press a button to get Restore Card button visible!</h2>
+					)}
+				</Box>
+			</Box>
+		</div>
 	);
 }
 
-export default App;
+export default Advanced;

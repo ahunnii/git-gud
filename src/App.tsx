@@ -1,17 +1,7 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 // import TinderCard from '../react-tinder-card/index '\
-import {
-	Button,
-	Modal,
-	ModalBody,
-	ModalCloseButton,
-	ModalContent,
-	ModalFooter,
-	ModalHeader,
-	ModalOverlay,
-	useDisclosure,
-} from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 
 import { MdCheckCircle, MdOutlineCancel, MdUndo } from "react-icons/md";
 
